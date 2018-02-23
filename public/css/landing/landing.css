@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+body {
+  color: #5a5a5a;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.landing-intro {
+  font-size: 24px;
+  font-weight : 700;
+  color : #F5F1F0 !important;
+}
+
+#locationError {
+  color : red !important;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* CUSTOMIZE THE Search form
+-------------------------------------------------- */
+#Search_section {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    background-color: #141414;
+    height: 100vh;
+    text-align: center;
+    background: url(/images/landing/mbr-1620x1080.jpg);
+    background-size: cover;
+}
+#Search_section::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: rgba(7, 59, 76, .7);
+}
+#Search_section .container{
+position: relative;
+z-index: 9;
+}
+.Search_form{
+  width: 100%;
+  max-width: 850px;
+  margin: auto;
+}
+.Search_form input[type="text"] {
+    width: 80%;
+    height: 40px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 5px 2px 2px 5px;
+    color: #000;
+}
+.Search_form input[type="submit"] {
+
+    margin-left: -8px;
+    border: 0;
+    background: #ff3366;
+    color: #fff;
+    height: 40px;
+    border-radius: 0px 5px 5px 0px;
+    font-weight: 500;
+    font-size: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.Serach_title{
+  display:block;
+}
+.Serach_title h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    color: #fff;
+}
+.Serach_title p {
+    font-size: 1.2em;
+    margin: 0;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.Restaurant_list_block {
+    padding: 4rem 0;
+    display: flex;
+    background: #f9f9f9;
+}
+.Restaurant_list_block .card {
+    border: 1px solid rgba(0,0,0,.075);
+    margin-bottom: 25px;
+}
+.Restaurant_list_block .card:hover{
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.2);
+}
+.Title_block{
+  width: 100%;
+}
+.Title_block h2 {
+    color: #141414;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+    text-transform: uppercase;
+}
+.Title_block p {
+    font-size: .9rem;
+    font-weight: 500;
+    color: #666;
+    letter-spacing: .5px;
+}
+
+.card-block{
+  padding:2rem 1.5rem;
+}
+.card-block h4 {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #141414;
+    margin-bottom: .2em;
+}
+.card-block p {
+    font-size: .9rem;
+    font-weight: 500;
+    color: #666;
+}
+.card-location{
+  display: block;
+}
+.card-block span {
+    font-size: .7rem;
+    font-weight: 600;
+    color: #666;
+    float: right;
+    width: 90%;
+}
+.card-location img {
+    margin-right: 10px;
+    float: left;
+    margin-top: 2px;
+}
+footer {
+    padding: 1rem 0;
+    background-color: #f8f5f2;
+    box-shadow: 0 -1px 2px 0 rgba(0,0,0,.12);
+    letter-spacing: 1px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+footer p {
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #666;
+    font-size: .7rem;
+}
+#preloader { position: fixed; left: 0; top: 0; z-index: 999; width: 100%; height: 100%; overflow: visible; background: #333 url('/images/landing/8.gif') no-repeat center center; opacity:0.9;}
+
+#vendorsLiting h1 {
+text-align: center;
+width:100%;
+}
+
+@media only screen and (max-width:480px) {
+	.navbar-brand img{
+		width:80%;
+		margin-bottom:.8rem;
+	}
+	.Search_form input[type="text"]{
+		width: 100%;
+		border-radius: 5px;
+		height: 50px;
+	font-size:.8rem;
+	margin-bottom: 10px;
+	}
+	.Search_form input[type="submit"]{
+		width: 100%;
+		margin-left: 0;
+		border-radius: 5px;
+		height:40px;
+}
+.Serach_title h1 {
+    font-size: 1.3rem;
+}
+.Serach_title p{
+	font-size: .9em;
+	margin-bottom:10px;
+}
+.Title_block h2{
+	font-size: 2rem;
+	padding: 0 20px;
+}
+footer{
+	padding: 1rem 1rem;
+	letter-spacing: 0;
+}
+footer p{
+	font-size: .6rem;
+	line-height: 18px;
+}
+}

@@ -11,6 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','LandingController@showLanding');
+
+Route::get('/mylocalrestaurants','VendorController@getLocalVendors');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+
+
+
+Route::get('/api/create/location','LocationController@create');
