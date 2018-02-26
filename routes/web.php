@@ -22,4 +22,4 @@ Auth::routes();
 
 
 
-Route::get('/api/create/location','LocationController@create');
+Route::get('/api/create/location','LocationController@confirmAddress');

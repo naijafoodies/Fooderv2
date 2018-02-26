@@ -103,6 +103,7 @@
       self::checkCoordinates($coordinates);
       $distance = $this->processDistanceApi($coordinates);
 
+      // API returns distance in meters. I will be converting to miles
       return $distance / 1609.34;
     }
 

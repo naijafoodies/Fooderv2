@@ -14,7 +14,7 @@ class LocationController extends Controller {
   /**
   * Function creates a location for client based on the address from the request
   */
-  public function create(Request $request) {
+  public function confirmAddress(Request $request) {
 
     $geoLocator = new GeoLocate();
 
