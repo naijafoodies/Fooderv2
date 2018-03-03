@@ -11,15 +11,53 @@
 |
 */
 
+
+///////////
+/// General Web Routes.
+////////
 Route::get('/','LandingController@showLanding');
 
-Route::get('/mylocalrestaurants','VendorController@getLocalVendors');
+Route::get('/mylocalrestaurants','FinderController@find');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
 
+////////////
+////  Vendor related API's
+//////////
+Route::group(array('prefix' => 'api/vendor/'), function() {
 
+  Route::post('create','VendorController@enroll');
+  Route::get('get/active','VendorController@getActiveVendors');
+});
+
+/////////////
+/// Vendor View Routes
+///////////
+Route::group(array('prefix' => 'vendor/'), function() {
+
+  Route::get('{name}/{id}','FoodListingController@showByVendor');
+
+});
+
+////////////
+/// Food API Group
+///////////
+
+Route::group(array('prefix' => 'api/food/'), function() {
+
+  Route::post('add','FoodController@add');
+
+});
 
 Route::get('/api/create/location','LocationController@confirmAddress');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

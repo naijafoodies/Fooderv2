@@ -1,0 +1,58 @@
+/**
+* Primarily meant for listing througout the fooder system. Lister uses the same box model as bootstrap thats why
+* main components they are. nf-lister-4 for example will only fit four list in list horizontally on a large screen
+*/
+
+.nf-lister-4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nf-lister-4 .list-item a{
+  color: inherit;
+}
+
+.nf-lister-4 .list-item {
+  margin-right: 50px;
+  margin-bottom: 20px;
+  width : 300px;
+  height: 250px;
+  border : 1px solid #F5F9F4;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  -moz-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  background: #FFFFFF;
+}
+
+.nf-lister-4 .list-item .list-img {
+  max-width: 300px;
+  max-height: 200px;
+
+}
+
+.nf-lister-4 .list-item .list-img img {
+  max-height: 100%;
+  max-width: 100%;
+  padding: 2px;
+}
+
+.nf-lister-4 .list-item:hover {
+  -webkit-box-shadow: 0px 0px 19px 2px rgba(0,0,0,0.44);
+  -moz-box-shadow: 0px 0px 19px 2px rgba(0,0,0,0.44);
+  box-shadow: 0px 0px 19px 2px rgba(0,0,0,0.44);
+  cursor: pointer;
+}
+
+.nf-lister-4 .list-item .list-description {
+  padding: 5px;
+  border-top : 1px solid #FAFCFB;
+}
+
+.nf-lister-4 .list-item .list-description .list-description-header{
+  font-weight: 600;
+}
+.pull-right {
+  float : right;
+}
