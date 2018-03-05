@@ -15,6 +15,9 @@ class CreateFoodTable extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('vendor_id');
+            $table->string('food_name');
+            $table->double('food_cost', 8, 2);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateFoodTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foods');
+        Schema::dropIfExists('food');
     }
 }

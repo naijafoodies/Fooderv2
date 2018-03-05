@@ -47,6 +47,7 @@
                       </div>
 
                       <div class="list-description">
+
                         <div class="list-description-header">
                           {{$vendor->name}}
                         </div>
@@ -62,7 +63,6 @@
                 @endforeach
 
               </div>
-
             </div>
 
           </div>

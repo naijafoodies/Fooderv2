@@ -15,6 +15,8 @@ class CreateFoodPicturesTable extends Migration
     {
         Schema::create('food_pictures', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('food_id');
+            $table->text('file_name');
             $table->timestamps();
         });
     }
