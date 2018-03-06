@@ -64,6 +64,7 @@ class VendorController extends Controller {
       $contract->contract_term = $request->contract_term;
       $contract->tax_rate = $request->tax_rate;
       $contract->start_date = date('Y-m-d H:i:s');
+      $contract->attaches_free_sides = $request->attaches_free_sides;
       $contract->end_date = ($request->contract_type == 1) ? date('Y-m-d H:i:s',strtotime('+3 months')) : date('Y-m-d H:i:s',strtotime('+1 year'));
       $contract->save();
 

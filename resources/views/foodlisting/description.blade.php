@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>{{$vendorName}} @ Naija Foodies</title>
+    <title>{{$food->food_name}} @ Naija Foodies</title>
 
     <!-- Bootstrap CSS -->
 
@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/vendordisplay/vendordisplay.css') }}" >
     <link rel="stylesheet" href="{{ asset('css/general/nflister.css') }}" >
-
+    <link rel="stylesheet" href="{{ asset('css/description/description.css') }}" >
 
   </head>
   <body>
@@ -31,37 +31,74 @@
     <div class="nf-page-content">
       <div class="container">
         <div class="row">
+
           <!-- Start of restaurants display -->
-            <div class="col-sm-12 col-lg-12 col-md-12">
+            <div class="col-sm-8">
 
-              <div class="nf-narrator">{{$vendorName}}</div>
+              <div class="description-panel">
 
-              <div class="nf-content nf-lister-blank">
+                <div class="row">
+                
+                  <div class="col-sm-5">
+                    <div class="description-image">
 
-                @foreach($foods as $food) 
-                  
-                  <div class="list-item">
+                      <img class="rounded" src="{{asset('/storage/'.$foodPicture)}}">
 
-                    <a href="/item/{{$food->id}}">
-                      <div class="list-header">{{$food->food_name}}<span class="description pull-right">${{number_format($food->food_cost,2)}}</span></div>
+                    </div>
+                  </div>
 
-                      <div class="list-description">{{$food->description}}</div>
-                    </a>
+                  <div class="col-sm-7">
+
+                    <div class="description-item">Name : 
+                      <span class="item-value">{{$food->food_name}}</span>
+                    </div>
+
+                    <div class="description-item">Cost : 
+                      <span class="item-value">${{number_format($food->food_cost,2)}}</span>
+                    </div>
+
+                    <div class="description-item">Vendor : 
+                      <span class="item-value">{{$vendor->name}}</span>
+                    </div>
+
+                    <div class="description-item">Description : 
+                      <span class="item-value">{{$description}}</span>
+                    </div>
+
+                    <div class="description-item">Distance to You : 
+                      <span class="item-value">{{ceil($distance)}} mile(s)</span>
+                    </div>
 
                   </div>
 
-                @endforeach
+                </div>
+              </div>
+
+              <div class="sides-panel">
+                
 
               </div>
 
+              <div class="meat-panel">
+                
+
+              </div>
+
+
+
             </div>
+
+            <div class="col-sm-4">
+dfd
+            </div>
+
+          </div>
 
           </div>
 
           <!-- End of Food display -->
 
         </div>
-      </div>
 
     <!-- End of content -->
 
@@ -73,6 +110,7 @@
 
     <!-- Swmactic ui -->
     <script src="{{ asset('js/general/semantic/dist/semantic.min.js') }}"></script>
+    <script src="{{ asset('js/foodlisting/description.js') }}"></script>
 
   </body>
 </html>

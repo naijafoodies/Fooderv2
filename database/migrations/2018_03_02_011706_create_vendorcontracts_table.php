@@ -19,6 +19,7 @@ class CreateVendorcontractsTable extends Migration
             $table->integer('contract_type_id');
             $table->integer('contract_term');
             $table->integer('tax_rate');
+            $table->tinyInteger('attaches_free_sides')->comment("This is a boolean that checks confirms if the customer includes free sides on each menu");
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->timestamps();

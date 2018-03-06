@@ -17,7 +17,6 @@ class CreateVendorsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
-            $table->Integer('side_classification_id')->comment("Side classification is the class assigned to vendors based on the number of sides they can have.");
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ Route::get('/','LandingController@showLanding');
 Route::get('/mylocalrestaurants','FinderController@find');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/item/{id}','FoodListingController@showFoodDescription');
 
 Auth::routes();
 

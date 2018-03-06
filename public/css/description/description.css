@@ -1,0 +1,28 @@
+
+
+.description-panel {
+  border : 1px solid #EEF3E1;
+  background: #FFFFFF;
+}
+
+.description-panel:hover {
+	-webkit-box-shadow: -1px -1px 34px -8px rgba(113,173,129,1);
+  -moz-box-shadow: -1px -1px 34px -8px rgba(113,173,129,1);
+  box-shadow: -1px -1px 34px -8px rgba(113,173,129,1);
+}
+
+.description-image {
+	
+	max-height: 150px;
+	max-width: 250px;
+}
+
+.description-item {
+	padding: 5px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.description-item .item-value {
+	font-weight: 400 !important;
+}
