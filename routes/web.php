@@ -46,10 +46,28 @@ Route::group(array('prefix' => 'vendor/'), function() {
 ////////////
 /// Food API Group
 ///////////
-
 Route::group(array('prefix' => 'api/food/'), function() {
 
   Route::post('add','FoodController@add');
+
+});
+
+//////////////
+////  Meat Api
+//////////////
+Route::group(array('prefix' => 'api/meat/'), function() {
+
+  Route::post('add','MeatController@add');
+
+});
+
+
+//////////////
+////  Side API
+///////////////
+Route::group(array('prefix' => 'api/side/'), function() {
+
+  Route::post('add','SideController@add');
 
 });
 
