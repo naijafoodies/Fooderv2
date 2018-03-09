@@ -34,4 +34,9 @@ class MeatController extends Controller
 
     }
 
+    public function getByVendor($vendorId) {
+
+      return response()->json(Meat::where('vendor_id',$vendorId)->get());
+    }
+
 }
