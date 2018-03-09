@@ -32,6 +32,8 @@ Route::group(array('prefix' => 'api/vendor/'), function() {
 
   Route::post('create','VendorController@enroll');
   Route::get('get/active','VendorController@getActiveVendors');
+  Route::get('{id}/meat/get','MeatController@getByVendor');
+  Route::get('{id}/sides/get','SideController@getByVendor');
 });
 
 /////////////
@@ -68,7 +70,6 @@ Route::group(array('prefix' => 'api/meat/'), function() {
 Route::group(array('prefix' => 'api/side/'), function() {
 
   Route::post('add','SideController@add');
-
 });
 
 Route::get('/api/create/location','LocationController@confirmAddress');
