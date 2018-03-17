@@ -82,3 +82,8 @@
 .description-item .item-value {
 	font-weight: 400 !important;
 }
+
+.input-counter {
+  width: 120px !important;
+  padding: .375rem .75rem;
+}

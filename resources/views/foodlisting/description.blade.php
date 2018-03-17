@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{$food->food_name}} @ Naija Foodies</title>
 
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('js/general/semantic/dist/semantic.min.css') }}" >
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link rel="stylesheet" href="{{ asset('css/general/pace/themes/red/pace-theme-loading-bar.css')}}">
 
     <link rel="stylesheet" href="{{ asset('css/general/common.css') }}" >
 
@@ -118,12 +120,20 @@
                   <div class="description-item">Total: $<span class="item-value" id="grossTotal">{{number_format($food->food_cost,2)}}</span></div>
                 </div>
 
-                <div class="description-section">
-                  <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Special Instructions</label>
-                    <textarea class="form-control" id="inputSpecialInstructions" rows="3" placeholder="Please state further requests. This might include food packaging, delivery time e.t.c "></textarea>
+                <div class="description-footer">
+
+                  <div class="description-item">
+                    <span class="">
+                      <label>Quantity : </label>
+                      <input class="input-counter" type="number" id="quantity" value="1" />
+                    </span>
+
+                    <span class="pull-right">
+                      <button type="button" class="btn btn-danger" id="addToCart">Add to cart</button>
+                    </span>
                   </div>
                 </div>
+
 
               </div>
 
@@ -142,6 +152,7 @@
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{ asset('js/general/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{ asset('js/general/pace/pace.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>

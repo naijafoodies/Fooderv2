@@ -22,7 +22,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link basket" href="#"><i class="cart arrow down green icon"></i></a>
+        <a class="nav-link basket" href="/cart"><i class="cart arrow down green icon"></i><span class="badge badge-danger">{{CartUtil::getCartCount()}}</span></a>
       </li>
 
     </ul>

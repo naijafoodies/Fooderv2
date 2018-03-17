@@ -21,6 +21,7 @@ Route::get('/mylocalrestaurants','FinderController@find');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/item/{id}','FoodListingController@showFoodDescription');
+Route::get('/cart','CartController@showCart');
 
 Auth::routes();
 
@@ -60,6 +61,17 @@ Route::group(array('prefix' => 'api/food/'), function() {
 Route::group(array('prefix' => 'api/meat/'), function() {
 
   Route::post('add','MeatController@add');
+
+});
+
+
+///////////
+/// Cart API
+////////////
+Route::group(array('prefix' => 'api/cart/'), function() {
+
+  Route::post('add','CartController@addToCart');
+  Route::get('get','CartController@getCartItem');
 
 });
 

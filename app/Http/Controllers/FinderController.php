@@ -26,6 +26,8 @@ class FinderController extends Controller {
     * I will be looping through an array of vendors here to get all vendors within 30 miles of the customer using
     * the geodistance algorithm for physical distance. WHile this algorithm does not consider driving distance, it
     * is more efficient to use now.
+    * @todo Needs to sorted based on distance
+    *
     */
     foreach($vendors AS $vendor) {
 

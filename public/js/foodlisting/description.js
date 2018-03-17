@@ -10,10 +10,18 @@ var Description = (function(cost) {
   var sidePanel = $('#sidePanel');
   var freeSidePanel = $('#freeSidePanel');
   var meatPanel = $('#meatPanel');
+  var foodId = Number($('#food_id').val());
+
   var selectedMeat = [];
   var selectedFreeSides = [];
   var selectedSides = [];
 
+  /**
+  * I will be adding an event listener for the addToCart button here
+  */
+    $('#addToCart').click(function() {
+      transactions.addToCart();
+    });
 
   var components = {
 
@@ -275,9 +283,62 @@ var Description = (function(cost) {
         console.info("issues loading meat");
       });
 
+    },
+
+    addToCart : function() {
+
+      $.ajax({
+        url : '/api/cart/add',
+        type : 'POST',
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+        },
+        dataType : 'json',
+        data : {
+          foodId : foodId,
+          selectedMeat : selectedMeat,
+          selectedFreeSides : selectedFreeSides,
+          selectedPaidSides : selectedSides,
+          quantity : cost.getQuantity()
+        },
+
+        success : function(response) {
+
+          if(response.success) {
+            $.alert({
+              title : "Sucess",
+              content : "Item Added to cart successfully",
+              theme: 'supervan',
+              type: 'green',
+              typeAnimated: true
+            });
+
+            setTimeout(function() {
+              history.back();
+            },1000);
+
+          }
+          else {
+            $.alert({
+              title : "Error",
+              content : "Item was not added sucessfully. Please try again",
+              theme: 'supervan',
+              type: 'red',
+              typeAnimated: true
+            });
+          }
+        },
+        fail : function(status) {
+          $.alert({
+            title : "Error",
+            content : "Issues with server. Please contact Support",
+            theme: 'supervan',
+            type: 'red',
+            typeAnimated: true
+          });
+        }
+      });
     }
-
-
   }
 
   return {

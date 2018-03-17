@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{$vendorName}} @ Naija Foodies</title>
 
@@ -38,8 +39,8 @@
 
               <div class="nf-content nf-lister-blank">
 
-                @foreach($foods as $food) 
-                  
+                @foreach($foods as $food)
+
                   <div class="list-item">
 
                     <a href="/item/{{$food->id}}">
