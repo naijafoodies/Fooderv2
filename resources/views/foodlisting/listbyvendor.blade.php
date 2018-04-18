@@ -46,7 +46,6 @@
                     <a href="/item/{{$food->id}}">
                       <div class="list-header">{{$food->food_name}}<span class="description pull-right">${{number_format($food->food_cost,2)}}</span></div>
 
-                      <div class="list-description">{{$food->description}}</div>
                     </a>
 
                   </div>

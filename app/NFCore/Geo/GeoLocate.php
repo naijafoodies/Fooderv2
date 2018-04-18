@@ -22,7 +22,6 @@
 
   namespace App\NFCore\Geo;
 
-  use GuzzleHttp\Exception\GuzzleException;
   use GuzzleHttp\Client;
 
   class GeoLocate {
@@ -30,7 +29,7 @@
     protected $guzzle; // guzzle client
     protected $developerKey; // developer's key to google API
 
-    private $isSucessful = true;
+    private $isSuccessful = true;
     private $latitude;
     private $longitude;
 
@@ -72,7 +71,7 @@
         $this->getAddress($address);
       }
       else {
-        $this->isSucessful = false;
+        $this->isSuccessful = false;
       }
     }
 
@@ -91,12 +90,12 @@
         $this->longitude = $response->results[0]->geometry->location->lng;
       }
       else {
-        $this->isSucessful = false;
+        $this->isSuccessful = false;
       }
     }
 
-    public function isSucessful() {
-      return $this->isSucessful;
+    public function isSuccessful() {
+      return $this->isSuccessful;
     }
 
     public function getLatitude() {

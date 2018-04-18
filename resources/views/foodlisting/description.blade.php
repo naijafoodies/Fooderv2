@@ -110,7 +110,7 @@
             <div class="col-sm-4">
 
               <div class="description-panel">
-                <div class="description-header">Cost Summary</div>
+                <div class="description-header">Order Summary</div>
 
                 <div class="description-item">Food Cost : $<span class="item-value" id="foodCost">{{number_format($food->food_cost,2)}}</span></div>
                 <div class="description-item">Side Cost : $<span class="item-value" id="totalSideCost">0.00</span></div>

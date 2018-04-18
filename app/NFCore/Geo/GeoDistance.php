@@ -22,8 +22,9 @@
 
   namespace App\NFCore\Geo;
 
-  use GuzzleHttp\Exception\GuzzleException;
   use GuzzleHttp\Client;
+  use Psr\Log\InvalidArgumentException;
+  use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 
   class GeoDistance {
 
@@ -33,14 +34,17 @@
     private $guzzle; // instance of the guzzle api
     private $developerKey = 'AIzaSyAHYH_rYFXt3r-NE-NU5MmIXEHgDRmUyQM';
 
-    private $isSucessful = false;
+    private $isSuccessful = false;
 
-    /**
-    * Core formula uses two coordinates. Mainly point A longitude, point A latitude and point B latitude, point B longitude
-    * The standard of measurement must be passed to the constructor. Statedard of measurement is either miles or meters
-    *
-    * Formula only calculates physical distance. We will google API to get travel distance
-    */
+    private $metersInMiles = 1609.34;
+
+      /**
+       * Core formula uses two coordinates. Mainly point A longitude, point A latitude and point B latitude, point B longitude
+       * The standard of measurement must be passed to the constructor. Statedard of measurement is either miles or meters
+       *
+       * Formula only calculates physical distance. We will google API to get travel distance
+       * @param null $standardOfMeasurement
+       */
     public function __construct($standardOfMeasurement = null) {
 
       if($standardOfMeasurement === 'meters') {
@@ -66,13 +70,14 @@
     }
 
 
-    /**
-    * Function calculates the distances between the coordinates passed to it usign the Vincenty formula. The Haversine formula seems to
-    * be incorrect for long distances
-    *
-    * @param coordinates - needs four keys fromLatitude,toLatitude,fromLongitude,toLongitude
-    * @return float physical address
-    */
+      /**
+       * Function calculates the distances between the coordinates passed to it usign the Vincenty formula. The Haversine formula seems to
+       * be incorrect for long distances
+       *
+       * @param array $coordinates
+       * @return float physical address
+       * @internal param $coordinates - needs four keys fromLatitude,toLatitude,fromLongitude,toLongitude
+       */
     public function getDistance($coordinates = array()) {
 
       self::checkCoordinates($coordinates);
@@ -92,25 +97,28 @@
     }
 
 
-    /**
-    * Function provides the driving distance between two locations using google api and depending on the guzzle client
-    *
-    * @param array
-    * @return object
-    */
+      /**
+       * Function provides the driving distance between two locations using google api and depending on the guzzle client
+       *
+       * @param array
+       * @return float
+       * @throws \GuzzleHttp\Exception\GuzzleException
+       */
     public function getDrivingDistance($coordinates = array()) {
 
       self::checkCoordinates($coordinates);
       $distance = $this->processDistanceApi($coordinates);
 
       // API returns distance in meters. I will be converting to miles
-      return $distance / 1609.34;
+      return $distance / $this->metersInMiles;
     }
 
-    /**
-    * Makes a google request to get distances between two places using guzzle
-    *
-    */
+      /**
+       * Makes a google request to get distances between two places using guzzle
+       * @param $coordinates
+       * @return int
+       * @throws \GuzzleHttp\Exception\GuzzleException
+       */
     private function processDistanceApi($coordinates) {
 
       $googleResponse = $this->guzzle->request('POST','https://maps.googleapis.com/maps/api/distancematrix/json?origins='.$coordinates['fromLatitude'].','.$coordinates['fromLongitude'].'&destinations='.$coordinates['toLatitude'].','.$coordinates['toLongitude'].'&mode=driving&language=pl-PL&key='.$this->getDeveloperKey());
@@ -122,13 +130,16 @@
         return $response->rows[0]->elements[0]->distance->value;
       }
 
+      return 0;
+
     }
 
 
-    /**
-    * Function verifies if @param has all the required keys to perform distance operation. it also checks is the values are valid
-    *
-    */
+      /**
+       * Function verifies if @param has all the required keys to perform distance operation. it also checks is the values are valid
+       *
+       * @return bool
+       */
     public static function checkCoordinates($coordinates) {
 
       if(self::hasToLatitude($coordinates) && self::hasFromLatitude($coordinates) && self::hasToLongitude($coordinates) && self::hasFromLongitude($coordinates)) {
@@ -139,7 +150,6 @@
         else {
           throw new InvalidArgumentException("One of many of the points does not meet requirements for geo coordinate eveluation ");
         }
-        return true;
       }
 
       throw new \InvalidArgumentException("Coordinates must include a toLatitude, fromLatitude, toLongitude, fromLongitude");
@@ -204,6 +214,46 @@
       }
 
       return $validLongitude;
+    }
+
+      /**
+       * @param array|\StdClass $locations
+       * Function checks through an array of locations to determine the one with the longest distances between the
+       * origin and each of the location. I will be using a priority queue to avoid writing an algo for this.
+       *
+       * The origin is an array consisting of latitude and longitude
+       * The origin consists of arrays of latitude and longitudes of all destination
+       * @return mixed
+       * @throws \GuzzleHttp\Exception\GuzzleException
+       */
+    public function locationWithLongestDistance(\StdClass $locations) {
+
+        if(!isset($locations->origin) || !isset($locations->routes)) {
+            throw new MissingMandatoryParametersException("Location needs an origin or route");
+        }
+
+        $queuedLocations = new \SplPriorityQueue;
+
+        foreach($locations->routes as $key=>$destination) {
+
+            /**
+             * I will be getting the driving distance in miles from here
+             */
+            $drivingDistance = $this->getDrivingDistance([
+                'fromLatitude' => $locations->origin[0],
+                'fromLongitude' => $locations->origin[1],
+                'toLatitude' => $destination[0],
+                'toLongitude' => $destination[1]
+            ]);
+
+            $locationKey = new \StdClass;
+            $locationKey->position = $key;
+            $queuedLocations->insert($locationKey,round($drivingDistance));
+        }
+
+        $queuedLocations->setExtractFlags(\SplPriorityQueue::EXTR_BOTH);
+        $indexOfTopPriority = $queuedLocations->top();
+        return $indexOfTopPriority['data']->position;
     }
 
   }

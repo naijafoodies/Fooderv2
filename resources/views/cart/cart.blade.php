@@ -36,8 +36,23 @@
       <div class="container">
         <div class="row">
 
+            <div class="col-8" id="cartContent">
 
-      </div>
+
+            </div>
+
+            <div class="col-4">
+                
+              <div class="description-panel">
+                <div class="description-header">Cart Summary</div>
+
+               
+              </div>
+
+            </div>
+
+
+        </div>
       </div>
       <!-- End of Food display -->
     </div>
@@ -55,7 +70,7 @@
     <!-- Swmactic ui -->
     <script src="{{ asset('js/general/semantic/dist/semantic.min.js') }}"></script>
     <script src="{{ asset('js/foodlisting/descriptioncost.js') }}"></script>
-    <script src="{{ asset('js/foodlisting/description.js') }}"></script>
+    <script src="{{ asset('js/cart/cart.js') }}"></script>
 
   </body>
 </html>

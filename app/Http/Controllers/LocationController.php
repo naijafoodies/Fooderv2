@@ -23,7 +23,7 @@ class LocationController extends Controller {
     /**
     * I will be creating a session array of User's geo coordinates
     */
-    if($geoLocator->isSucessful()) {
+    if($geoLocator->isSuccessful()) {
       session([
         'latitude' => $geoLocator->getLatitude(),
         'longitude' => $geoLocator->getLongitude()
@@ -34,7 +34,7 @@ class LocationController extends Controller {
     *  WIll be returning the result of transactions
     */
       return response()->json([
-        "successful" => $geoLocator->isSucessful()
+        "successful" => $geoLocator->isSuccessful()
       ]);
 
   }

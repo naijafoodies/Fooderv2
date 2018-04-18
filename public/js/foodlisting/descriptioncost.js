@@ -18,7 +18,7 @@ var DescriptionCost = (function() {
   */
   quantityPanel.change(function() {
     if($(this).val()) {
-      if(Number($(this).val()) < 0) {
+      if(Number($(this).val()) <= 0) {
         quantity = 1;
         $(this).val(1);
         total.update();

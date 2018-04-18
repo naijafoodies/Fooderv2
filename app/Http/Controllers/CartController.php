@@ -16,8 +16,15 @@ class CartController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @return $this
+     */
     public function showCart(Request $request) {
-      return view('cart.cart');
+
+        $data['items'] = $this->getCartItem($request);
+
+        return view('cart.cart')->with($data);
     }
 
 
@@ -84,7 +91,7 @@ class CartController extends Controller
       for($i = 0; $i < count($selectedFreeSides); $i++) {
 
         array_push($freeSidesCollection,[
-          'food_cart_item_id' => $foodId,
+          'cart_food_item_id' => $foodId,
           'free_side_id' => $selectedFreeSides[$i],
           'created_at' => date('Y-m-d H:i:s')
         ]);

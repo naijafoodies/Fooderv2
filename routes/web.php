@@ -93,3 +93,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('api/delivery/cost','DeliveryController@getCost');
