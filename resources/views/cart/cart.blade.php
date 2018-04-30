@@ -36,17 +36,23 @@
       <div class="container">
         <div class="row">
 
-            <div class="col-8" id="cartContent">
+            <div class="col-9">
+                <div class="nf-narrator">Cart</div>
+                <div class="nf-content nf-lister-blank" id="cartList">
 
-
+                </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-3">
                 
-              <div class="description-panel">
+              <div class="description-panel" id="cartPanel">
                 <div class="description-header">Cart Summary</div>
 
                
+              </div>
+
+              <div class="checkoutButton">
+                <button class="btn btn-success" id="checkoutButton">Checkout</button>
               </div>
 
             </div>
