@@ -12,6 +12,9 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'http://fooderv2.naijafoodies/api/vendor/create',
+        'http://fooderv2.naijafoodies/api/food/add',
+        'http://fooderv2.naijafoodies/api/meat/add',
+        'http://fooderv2.naijafoodies/api/side/add'
     ];
 }

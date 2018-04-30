@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'FooderV2'),
 
     /*
     |--------------------------------------------------------------------------
@@ -148,6 +148,10 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+        * Custom providers
+        */
+
+        /*
          * Package Service Providers...
          */
 
@@ -208,6 +212,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        // Custom aliases
+        'CartUtil' => App\NFCore\CartUtil::class,
 
     ],
 

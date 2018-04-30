@@ -11,6 +11,87 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+///////////
+/// General Web Routes.
+////////
+Route::get('/','LandingController@showLanding');
+
+Route::get('/mylocalrestaurants','FinderController@find');
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/item/{id}','FoodListingController@showFoodDescription');
+Route::get('/cart','CartController@showCart');
+
+Auth::routes();
+
+
+////////////
+////  Vendor related API's
+//////////
+Route::group(array('prefix' => 'api/vendor/'), function() {
+
+  Route::post('create','VendorController@enroll');
+  Route::get('get/active','VendorController@getActiveVendors');
+  Route::get('{id}/meat/get','MeatController@getByVendor');
+  Route::get('{id}/sides/get','SideController@getByVendor');
 });
+
+/////////////
+/// Vendor View Routes
+///////////
+Route::group(array('prefix' => 'vendor/'), function() {
+
+  Route::get('{name}/{id}','FoodListingController@showByVendor');
+
+});
+
+////////////
+/// Food API Group
+///////////
+Route::group(array('prefix' => 'api/food/'), function() {
+
+  Route::post('add','FoodController@add');
+
+});
+
+//////////////
+////  Meat Api
+//////////////
+Route::group(array('prefix' => 'api/meat/'), function() {
+
+  Route::post('add','MeatController@add');
+
+});
+
+
+///////////
+/// Cart API
+////////////
+Route::group(array('prefix' => 'api/cart/'), function() {
+
+  Route::post('add','CartController@addToCart');
+  Route::get('get','CartController@getCartItem');
+
+});
+
+
+//////////////
+////  Side API
+///////////////
+Route::group(array('prefix' => 'api/side/'), function() {
+
+  Route::post('add','SideController@add');
+});
+
+Route::get('/api/create/location','LocationController@confirmAddress');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('api/delivery/cost','DeliveryController@getCost');

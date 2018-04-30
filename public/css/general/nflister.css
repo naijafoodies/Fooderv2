@@ -1,0 +1,125 @@
+/**
+* Primarily meant for listing througout the fooder system. Lister uses the same box model as bootstrap thats why
+* main components they are. nf-lister-4 for example will only fit four list in list horizontally on a large screen
+*/
+
+.nf-lister-4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: left;
+}
+
+@media only screen and (max-width: 768px) {
+  .nf-lister-4 {
+
+    justify-content: center;
+  }
+}
+
+.nf-lister-4 .list-item a{
+  color: inherit;
+}
+
+.nf-lister-4 .list-item {
+  margin-right: 10px;
+  margin-bottom: 20px;
+  width : 250px;
+  height: 250px;
+  border : 1px solid #F5F9F4;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  -moz-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  background: #FFFFFF;
+}
+
+.nf-lister-4 .list-item .list-img {
+  max-width: 300px;
+  max-height: 200px;
+}
+
+.nf-lister-4 .list-item .list-img img {
+  max-height: 100%;
+  max-width: 100%;
+  padding: 2px;
+}
+
+.nf-lister-4 .list-item:hover {
+  -webkit-box-shadow: 0px 0px 19px 2px rgba(0,0,0,0.44);
+  -moz-box-shadow: 0px 0px 19px 2px rgba(0,0,0,0.44);
+  box-shadow: 0px 0px 19px 2px rgba(0,0,0,0.44);
+  cursor: pointer;
+}
+
+.nf-lister-4 .list-item .list-description {
+  padding: 5px;
+  border-top : 1px solid #FAFCFB;
+}
+
+.nf-lister-4 .list-item .list-description .list-description-header{
+  font-weight: 600;
+}
+
+
+/**
+* Blank listers. No Image
+*/
+
+.nf-lister-blank {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: left;
+}
+
+.nf-lister-blank .list-item:hover {
+  border: 1px solid #B4DA5D;
+}
+
+
+
+.nf-lister-blank .list-item a {
+  color: inherit;
+}
+
+@media only screen and (max-width: 768px) {
+  .nf-lister-blank {
+
+    justify-content: center;
+  }
+}
+
+.nf-lister-blank .list-item {
+  margin-right: 10px;
+  margin-bottom: 20px;
+  width : 250px;
+  height: 100px;
+  border : 1px solid #F5F9F4;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  -moz-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.44);
+  background: #FFFFFF;
+  padding: 10px;
+}
+
+.nf-lister-blank .list_item .list-header {
+  font-size: 16px-
+  font-weight: 600;
+}
+
+.nf-lister-blank .list-item .list-header .description {
+  border : 1px solid #BAC382;
+  padding: 2px;
+  border-radius: 6px;
+  -webkit-box-shadow: -1px -1px 34px -8px rgba(113,173,129,1);
+  -moz-box-shadow: -1px -1px 34px -8px rgba(113,173,129,1);
+  box-shadow: -1px -1px 34px -8px rgba(113,173,129,1);
+}
+
+.nf-lister-blank .list-item .list-description {
+
+  border-top : 1px solid #E9E9E5;
+  margin-top : 19px;
+}
