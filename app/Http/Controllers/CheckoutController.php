@@ -23,6 +23,6 @@ class CheckoutController extends Controller
         $data["cartItems"] = $cart->getCartItem($cart->getCartId());
         $data["tax"] = $taxService->get(new MultiplicativePropertyTaxSystem());
 
-        dd($data);
+        return view("checkout.index")->with($data);
     }
 }
