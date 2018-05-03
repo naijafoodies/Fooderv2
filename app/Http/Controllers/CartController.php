@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\NFCore\Service\Cart\CartService;
 use Illuminate\Http\Request;
 use App\Models\CartFoodItem;
 use App\Models\CartMeatItem;
@@ -105,8 +106,10 @@ class CartController extends Controller
 
 
     /**
-    * Instead of looping through the free sides, I will be creating an array of free sides to create a batch insert
-    */
+     * Instead of looping through the free sides, I will be creating an array of free sides to create a batch insert
+     * @param $selectedPaidSides
+     * @param $foodId
+     */
     public static function addPaidSideToCart($selectedPaidSides,$foodId) {
       $paidSidesCollection = [];
       $selectedPaidSides = (!$selectedPaidSides) ? [] : $selectedPaidSides;
@@ -145,22 +148,15 @@ class CartController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @param null $cartId
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getCartItem(Request $request,$cartId = null) {
 
       $cartId = ($cartId) ? $cartId : $this->getCartUniqueId($request);
-      $cartItems = new \StdClass;
 
-      $cartItems->foodItems = CartFoodItem::getCartItem($cartId);
-
-      /**
-      * I will be looping through the food to merge all paid sides, free sides and meat associated with the food item
-      */
-      foreach($cartItems->foodItems AS $key=>$value) {
-        $cartItems->foodItems[$key]->attachedMeats = CartMeatItem::getCartItem($value->id);
-        $cartItems->foodItems[$key]->attachedFreeSides = CartFreeSideItem::getCartItem($value->id);
-        $cartItems->foodItems[$key]->attachedPaidSides = CartPaidSideItem::getCartItem($value->id);
-      }
-
-      return response()->json($cartItems);
+      return response()->json(CartService::getCartItem($cartId));
     }
 }

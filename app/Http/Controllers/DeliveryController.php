@@ -28,7 +28,7 @@ class DeliveryController extends Controller
         $vendorCoordinates = self::getOrderVendorCoordinates($cartId);
         $deliveryCoordinates = self::getDeliveryCoordinates($request);
 
-        return response()->json(Cart::delivery($deliveryCoordinates->latitude,$deliveryCoordinates->longitude,$vendorCoordinates)->cost());
+        return response()->json((float)Cart::delivery($deliveryCoordinates->latitude,$deliveryCoordinates->longitude,$vendorCoordinates)->cost());
     }
 
     public function getTotalDistance() {
@@ -73,11 +73,9 @@ class DeliveryController extends Controller
      * @return \StdClass
      */
     public static function getDeliveryCoordinates(Request $request) {
-
         $coordinates = new \StdClass;
 
         if($request->session()->has('latitude') && $request->session()->has('longitude')) {
-
             $coordinates->latitude = session('latitude');
             $coordinates->longitude = session('longitude');
         }
