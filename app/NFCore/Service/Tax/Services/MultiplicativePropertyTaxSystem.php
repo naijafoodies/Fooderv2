@@ -15,8 +15,10 @@ namespace App\NFCore\Service\Tax\Services;
 
 use App\Models\VendorContract;
 use App\NFCore\Service\Cart\CartService;
+use App\NFCore\Service\Delivery\DeliveryLocationService;
 use App\NFCore\Service\Tax\ITax;
 use Illuminate\Support\Collection;
+use App\NFCore\Support\Factories\Cart;
 
 class MultiplicativePropertyTaxSystem implements ITax
 {
@@ -30,16 +32,22 @@ class MultiplicativePropertyTaxSystem implements ITax
      * @param string $cartId
      * @return \StdClass
      * Using a multiplicative
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getTaxAmount(string $cartId)
     {
         $cartItems = CartService::getCartItem($cartId);
+
+        $deliveryLocationService = new DeliveryLocationService($cartId);
+        $orderDestination = $deliveryLocationService->getDestinationCoordinates(request());
+        $deliveryCost = Cart::delivery($orderDestination->latitude,$orderDestination->longitude,$deliveryLocationService->getOrderVendorCoordinates());
 
         $cartSummary = new \StdClass;
         $taxCostObject = new \StdClass;
         $cartSummary->totalCostWithoutTax = 0;
         $cartSummary->totalCostWithTax = 0;
         $cartSummary->totalTaxCharged = 0;
+        $cartSummary->deliveryCost = $deliveryCost->cost();
 
         /**
          * I will be looping through all the orders to compute the cost and set the vendors so that tax percentage can be added later
@@ -50,12 +58,12 @@ class MultiplicativePropertyTaxSystem implements ITax
              * To be able to seperate each vendors, I will be checking if the vendor is already created in the taxCost object.
              */
             if(isset($taxCostObject->$vendorId)) {
-                $taxCostObject->$vendorId->cost += ($value->food_cost + self::calculateOtherCost($value->attachedPaidSides) + self::calculateOtherCost($value->attachedMeats));
+                $taxCostObject->$vendorId->cost += ($value->food_cost + self::calculateOtherCost($value->attachedPaidSides) + self::calculateOtherCost($value->attachedMeats)) * $value->quantity;
                 $cartSummary->totalCostWithoutTax += $taxCostObject->$vendorId->cost;
             }
             else {
                 $taxCostObject->$vendorId = new \StdClass;
-                $taxCostObject->$vendorId->cost = ($value->food_cost + self::calculateOtherCost($value->attachedPaidSides) + self::calculateOtherCost($value->attachedMeats));
+                $taxCostObject->$vendorId->cost = ($value->food_cost + self::calculateOtherCost($value->attachedPaidSides) + self::calculateOtherCost($value->attachedMeats)) * $value->quantity;
                 $cartSummary->totalCostWithoutTax += $taxCostObject->$vendorId->cost;
             }
         }

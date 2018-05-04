@@ -50,7 +50,9 @@ class DeliveryService
             $cost = $totalMiles * $this->feeAboveFiveMiles;
         }
 
-        return number_format($cost,2);
+        $cost = number_format($cost,2);
+
+        return (float) $cost;
     }
 
     /**
